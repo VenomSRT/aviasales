@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Filter } from "./components/Filter/Filter";
 import { Tickets } from "./components/Tickets/Tickets";
 import { getData } from "./api/api";
+import logo from "./images/main-logo.png";
 
 function App() {
   const [tickets, setTickets] = useState([]);
@@ -17,7 +18,7 @@ function App() {
         <a href="#" className="image-container__link">
           <img
             className="image-container__image"
-            src="./aviasales/src/images/airline.png"
+            src={logo}
             alt="main logo"
           />
         </a>
