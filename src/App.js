@@ -18,8 +18,6 @@ function App() {
           element.id = i;
         });
 
-        console.log(sortedByPrice);
-
         setTickets(sortedByPrice);
       })
   }, []);
