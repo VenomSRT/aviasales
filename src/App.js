@@ -9,13 +9,13 @@ function App() {
 
   useEffect(() => {
     getData()
-      .then(data => console.log(data))
-  }, []);
+      .then(data => setTickets(data))}
+  , []);
 
   return (
-    <main className="main">
-      <div className="image-container">
-        <a href="#" className="image-container__link">
+    <main className="main container">
+      <div className="image-container text-center">
+        <a href="#" className="image-container__link justify-content-center">
           <img
             className="image-container__image"
             src={logo}
@@ -24,9 +24,11 @@ function App() {
         </a>
       </div>
 
-      <Filter />
-
-      <Tickets tickets={tickets}/>
+      <div class="row justify-content-center">
+        <Filter />
+  
+        <Tickets tickets={tickets} />
+      </div>
     </main>
   );
 }

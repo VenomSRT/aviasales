@@ -4,12 +4,12 @@ import { Ticket } from '../Ticket/TIcket'
 export const Tickets = ({tickets}) => {
 
     return (
-        <div className="tickets">
+        <ul className="tickets col-lg-8">
             {tickets.length > 0 && 
                 tickets.map(ticket => 
                     <Ticket key={ticket.id} ticketData={ticket}/>    
                 )            
             }
-        </div>
+        </ul>
     )
 }
