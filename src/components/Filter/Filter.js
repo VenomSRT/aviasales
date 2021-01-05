@@ -2,9 +2,9 @@ import React from 'react';
 
 export const Filter = () => {
     return (
-        <div className="col-lg-4">
+        <div className="col-lg-4 shadow p-3 mb-5 bg-white rounded">
             <h3 className="">Валюта</h3>
-            <div className="container btn-group btn-group-lg">
+            <div className="container btn-group btn-group-lg p-0">
                 <button className="filter__button btn btn-secondary checked">RUB</button>
                 <button className="filter__button btn btn-secondary">USD</button>
                 <button className="filter__button btn btn-secondary">EUR</button>
@@ -12,7 +12,7 @@ export const Filter = () => {
 
             <h3 className="filter__title">Количество пересадок</h3>
             <div className="filter__checkbox-container">
-                <label htmlFor="#" className="form-check-label container">
+                <label htmlFor="#" className="form-check-label container p-l-0">
                     <input type="checkbox" className="form-check-input col"/>
                     <span className="col">Все</span>
                     <span className="col">Только</span>
