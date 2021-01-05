@@ -28,12 +28,12 @@ export const Ticket = ({ ticketData }) => {
 
                 <div className="d-flex justify-content-between">
                     <div className="ticket__deprture-info">
-                        <div className="ticket__origin-name">{ticketData.origin_name}</div>
+                        <div className="ticket__origin-name">{`${ticketData.origin}, ${ticketData.origin_name}`}</div>
                         <div className="text-muted">{ticketData.departure_date}</div>
                     </div>
 
                     <dib className="ticket__arrival-info">
-                        <div className="ticket__destination-name">{ticketData.destination_name}</div>
+                        <div className="ticket__destination-name">{`${ticketData.destination_name}, ${ticketData.destination}`}</div>
                         <div className="text-muted">{ticketData.arrival_date}</div>
                     </dib>
                 </div>
