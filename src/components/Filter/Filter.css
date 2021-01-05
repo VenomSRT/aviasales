@@ -1,0 +1,13 @@
+.check-only {
+  visibility: hidden;
+  cursor: pointer;
+  color: rgb(24, 120, 255);
+}
+
+.checkbox-label:hover {
+  background-color: rgb(232, 244, 255);
+}
+
+.checkbox-label:hover > .check-only {
+  visibility: visible;
+}

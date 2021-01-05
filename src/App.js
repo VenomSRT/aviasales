@@ -14,6 +14,12 @@ function App() {
       .then(data => {
         let sortedByPrice = data.sort((ticket1, ticket2) => ticket1.price - ticket2.price);
 
+        sortedByPrice.forEach((element, i) => {
+          element.id = i;
+        });
+
+        console.log(sortedByPrice);
+
         setTickets(sortedByPrice);
       })
   }, []);
@@ -30,7 +36,7 @@ function App() {
         </a>
       </div>
 
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           some text
         </div>
