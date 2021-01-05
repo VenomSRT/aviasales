@@ -19,7 +19,13 @@ export const Ticket = ({ ticketData }) => {
                     <div className="display-4">{ticketData.departure_time}</div>
                     
                     <div className="d-flex flex-column flex-grow-1 px-2">
-                        <span className="m-auto">{ticketData.stops} пересадка</span>
+                        <span className="m-auto">
+                            {`${ticketData.stops} ${
+                                ((ticketData.stops === 0 || ticketData.stops > 4) && 'пересадок')
+                                || ((ticketData.stops > 1 && ticketData.stops < 5) && 'пересадки')
+                                || (ticketData.stops === 1 && 'пересадка')
+                            }`}
+                        </span>
                         <img className="w-100" src={planeImage} alt="plane" />
                     </div>
 

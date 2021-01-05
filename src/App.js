@@ -7,16 +7,21 @@ import "./main.css";
 
 function App() {
   const [tickets, setTickets] = useState([]);
+  const [currency, setCurrency] = useState('RUB');
 
   useEffect(() => {
     getData()
-      .then(data => setTickets(data))}
-  , []);
+      .then(data => {
+        let sortedByPrice = data.sort((ticket1, ticket2) => ticket1.price - ticket2.price);
+
+        setTickets(sortedByPrice);
+      })
+  }, []);
 
   return (
     <main className="main container">
       <div className="image-container text-center py-3">
-        <a href="#" className="image-container__link justify-content-center">
+        <a href="#" className="justify-content-center">
           <img
             className="image-container__image"
             src={logo}
@@ -25,7 +30,14 @@ function App() {
         </a>
       </div>
 
-      <div class="row justify-content-center">
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          some text
+        </div>
+      </div>
+      
+
+      <div className="row justify-content-center">
         <Filter />
   
         <Tickets tickets={tickets} />
