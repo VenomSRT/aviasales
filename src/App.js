@@ -23,11 +23,11 @@ function App() {
   }, []);
 
   return (
-    <main className="main container">
-      <div className="image-container text-center py-3">
-        <a href="#" className="justify-content-center">
+    <div className="content container">
+      <div className="header text-center py-3">
+        <a href="#" className="header__image-link justify-content-center">
           <img
-            className="image-container__image"
+            className="header__image"
             src={logo}
             alt="main logo"
           />
@@ -41,12 +41,12 @@ function App() {
       </div>
       
 
-      <div className="row justify-content-center">
+      <div className="main row justify-content-center">
         <Filter />
   
         <Tickets tickets={tickets} />
       </div>
-    </main>
+    </div>
   );
 }
 
