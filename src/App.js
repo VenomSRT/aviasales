@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { store } from "./store/store";
-import { connect } from 'react-redux';
-import { loadTickets, loadTicketsSuccess, loadTicketsError } from './store/actions';
+import React, { useEffect } from "react";
 import { Filter } from "./components/Filter/Filter";
 import { Tickets } from "./components/Tickets/Tickets";
+import { useDispatch } from 'react-redux';
+import { loadTickets } from './store/actions';
 import logo from "./images/main-logo.png";
 import "./main.css";
 
 function App(props) {
-  const [currency, setCurrency] = useState('RUB');
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(props);
-    props.loadTickets();
-    console.log(props.tickets);
-  }, [props]);
+      dispatch(loadTickets());
+  }, []);
 
   return (
     <div className="content container">
@@ -44,12 +41,4 @@ function App(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    tickets: state.tickets,
-  }
-};
-
-const mapDispatchToProps = { loadTickets, loadTicketsSuccess, loadTicketsError };
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

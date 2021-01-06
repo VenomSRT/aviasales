@@ -1,10 +1,23 @@
-export const loadTickets = () => ({ type: "LOAD_TICKETS" });
+import { getData } from '../api/api';
 
-export const loadTicketsSuccess = tickets => (
-    {   
-        type: "LOAD_TICKETS_SUCCESS",
-        tickets 
+export const loadTickets = () => {
+    return dispatch => {
+        getData()
+            .then(data => {
+                dispatch(loadTicketsSuccess(data.tickets))
+            })
+            .catch(err => {
+                dispatch(loadTicketsError(err))
+            })
     }
-)
+}
 
-export const loadTicketsError = () => ({ type: "LOAD_TICKETS_ERROR" })
+const loadTicketsSuccess = tickets => ({   
+    type: "LOAD_TICKETS_SUCCESS",
+    payload: tickets
+})  
+
+const loadTicketsError = error => ({
+    type: "LOAD_TICKETS_ERROR",
+    payload: error
+})

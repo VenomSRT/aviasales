@@ -1,15 +1,16 @@
-import React from 'react';
-import { Ticket } from '../Ticket/TIcket'
-import { store } from "../../store/store";
+import React from "react";
+import { useSelector } from 'react-redux';
+import { Ticket } from '../Ticket/TIcket';
 
-export const Tickets = (props) => {
-    console.log(store.getState());
-    // const tickets = store.getState().tickets;
+export const Tickets = () => {
+    const tickets = useSelector(state => {
+        return state.tickets;
+    });
 
     return (
         <ul className="tickets col-lg-9 px-5">
-            {props?.tickets?.length > 0 && 
-                props?.tickets?.map(ticket => 
+            {tickets.length > 0 && 
+                tickets.map(ticket => 
                     <Ticket key={ticket.id} ticketData={ticket}/>    
                 )            
             }
