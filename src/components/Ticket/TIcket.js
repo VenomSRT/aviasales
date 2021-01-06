@@ -14,6 +14,7 @@ export const Ticket = ({ ticketData }) => {
                     Купить за {ticketData.price}
                 </button>
             </div>
+            
             <div className="ticket__right-section col-lg-8 px-2 py-3">
                 <div className="ticket__times-container d-flex justify-content-between align-items-center">
                     <div className="ticket__departure-time fs-1 col-lg-2">{ticketData.departure_time}</div>

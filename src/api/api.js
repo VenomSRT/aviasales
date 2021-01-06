@@ -9,6 +9,5 @@ export function getData() {
 
                 return response.json()
             })
-            .then(data => data.tickets)
-            .catch(e => console.log(e))
+            
 }

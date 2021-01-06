@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { store } from "./store/store";
+import { connect } from 'react-redux';
+import { loadTickets, loadTicketsSuccess, loadTicketsError } from './store/actions';
 import { Filter } from "./components/Filter/Filter";
 import { Tickets } from "./components/Tickets/Tickets";
-import { getData } from "./api/api";
 import logo from "./images/main-logo.png";
 import "./main.css";
 
-function App() {
-  const [tickets, setTickets] = useState([]);
+function App(props) {
   const [currency, setCurrency] = useState('RUB');
 
   useEffect(() => {
-    getData()
-      .then(data => {
-        let sortedByPrice = data.sort((ticket1, ticket2) => ticket1.price - ticket2.price);
-
-        sortedByPrice.forEach((element, i) => {
-          element.id = i;
-        });
-
-        setTickets(sortedByPrice);
-      })
-  }, []);
+    console.log(props);
+    props.loadTickets();
+    console.log(props.tickets);
+  }, [props]);
 
   return (
     <div className="content container">
@@ -44,10 +38,18 @@ function App() {
       <div className="main row justify-content-center">
         <Filter />
   
-        <Tickets tickets={tickets} />
+        <Tickets tickets={props.tickets} />
       </div>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    tickets: state.tickets,
+  }
+};
+
+const mapDispatchToProps = { loadTickets, loadTicketsSuccess, loadTicketsError };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
