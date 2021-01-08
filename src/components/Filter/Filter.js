@@ -1,14 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadCurrencyRate } from '../../store/actions';
 import './Filter.css';
 
 export const Filter = () => {
+    const dispatch = useDispatch();
+    const currencyButtons = document.querySelectorAll('.filter__currency-button')
+    const currencyBase = useSelector(state => {
+        return state.currencyBase;
+    });
+
+    useEffect(() => {
+        currencyButtons.forEach(button => {
+            if (button.textContent !== currencyBase) {
+                button.classList.remove('active');
+            } else {
+                button.classList.add('active');
+            }
+        })
+    })
+    
+    function handleCurrency(e) {
+        const newCurrencyBase = e.target.textContent;
+
+        dispatch(loadCurrencyRate(currencyBase, newCurrencyBase));
+    }
+
     return (
         <aside className="filter d-inline-block col-lg-3 shadow p-3 mb-5 bg-white rounded">
             <h3 className="filter__currency-title fs-4">Валюта</h3>
             <div className="filter__currency-buttons container btn-group btn-group-lg p-0">
-                <button className="filter__currency-button btn btn-primary active">RUB</button>
-                <button className="filter__currency-button btn btn-primary">USD</button>
-                <button className="filter__currency-button btn btn-primary">EUR</button>
+                <button className="filter__currency-button btn btn-primary active" onClick={(e) => handleCurrency(e)}>RUB</button>
+                <button className="filter__currency-button btn btn-primary" onClick={(e) => handleCurrency(e)}>USD</button>
+                <button className="filter__currency-button btn btn-primary" onClick={(e) => handleCurrency(e)}>EUR</button>
             </div>
 
             <h3 className="filter__stops-title pt-4 fs-4">Количество пересадок</h3>

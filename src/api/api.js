@@ -1,13 +1,12 @@
-const BASE_URL = 'tickets.json';
+const TICKETS_URL = 'tickets.json';
+const CURRENCY_URL = 'https://api.exchangeratesapi.io/latest?base=';
 
 export function getData() {
-    return fetch(BASE_URL)
-            .then(response => {
-                if (!response.ok) {
-                    throw response;
-                }
+    return fetch(TICKETS_URL)
+            .then(response => response.json())
+}
 
-                return response.json()
-            })
-            
+export function getRate(base) {
+    return fetch(CURRENCY_URL + base)
+            .then(response => response.json())
 }

@@ -1,8 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import airlineLogo from '../../images/airline.png';
 import planeImage from '../../images/plane.png';
 
 export const Ticket = ({ ticketData }) => {
+    const currencySymbol = useSelector(state => {
+        return state.currencySymbol;
+    });
+
     return (
         <li className="ticket row shadow px-2 py-0 mb-3 bg-white rounded">
             <div className="ticket__left-section col-lg-4 d-flex flex-column px-2 py-3">
@@ -11,7 +16,7 @@ export const Ticket = ({ ticketData }) => {
                 </div>
 
                 <button className="ticket__button-buy btn btn-warning p-3 text-white fw-bolder">
-                    Купить за {ticketData.price}
+                    Купить за {Math.round(ticketData.price)}{String.fromCharCode(currencySymbol)}
                 </button>
             </div>
             

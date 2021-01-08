@@ -1,4 +1,4 @@
-import { getData } from '../api/api';
+import { getData, getRate } from '../api/api';
 
 export const loadTickets = () => {
     return dispatch => {
@@ -13,11 +13,39 @@ export const loadTickets = () => {
 }
 
 const loadTicketsSuccess = tickets => ({   
-    type: "LOAD_TICKETS_SUCCESS",
+    type: 'LOAD_TICKETS_SUCCESS',
     payload: tickets
 })  
 
 const loadTicketsError = error => ({
-    type: "LOAD_TICKETS_ERROR",
+    type: 'LOAD_TICKETS_ERROR',
     payload: error
+})
+
+export const loadCurrencyRate = (currencyBase, newCurrencyBase) => {
+    return dispatch => {
+        getRate(currencyBase)
+            .then(data => {
+                dispatch(setCurrencyPrice(newCurrencyBase, data.rates));
+                dispatch(setCurrencySymbol(newCurrencyBase));
+            })
+            .catch(err => {
+                dispatch(setCurrencyPriceError(err))
+            })
+    }
+}
+
+const setCurrencyPrice = (newCurrencyBase, rates) => ({ 
+    type: 'SET_CURRENCY_PRICE',
+    newCurrencyBase,
+    rates
+});
+
+const setCurrencyPriceError = error => ({
+    type: 'SET_CURRENCY/ERROR',
+    payload: error
+})
+
+const setCurrencySymbol = newCurrencyBase => ({
+    type: `SET_CURRENCY_SYMBOL/${newCurrencyBase}`
 })
