@@ -17,24 +17,13 @@ function App(props) {
     <div className="content container">
       <div className="header text-center py-3">
         <a href="#" className="header__image-link justify-content-center">
-          <img
-            className="header__image"
-            src={logo}
-            alt="main logo"
-          />
+          <img className="header__image" src={logo} alt="main logo" />
         </a>
       </div>
 
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered">
-          some text
-        </div>
-      </div>
-      
-
       <div className="main row justify-content-center">
         <Filter />
-  
+
         <Tickets tickets={props.tickets} />
       </div>
     </div>

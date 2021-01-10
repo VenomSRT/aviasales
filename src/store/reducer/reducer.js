@@ -1,7 +1,9 @@
 const initialState = {
   tickets: [],
+  filteredTickets: [],
   currencySymbol: '',
   currencyBase: 'RUB',
+  modalActive: true,
   error: null,
 }
 

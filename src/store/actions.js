@@ -22,6 +22,7 @@ const loadTicketsError = error => ({
     payload: error
 })
 
+
 export const loadCurrencyRate = (currencyBase, newCurrencyBase) => {
     return dispatch => {
         getRate(currencyBase)
