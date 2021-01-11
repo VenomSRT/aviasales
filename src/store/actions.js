@@ -50,3 +50,8 @@ const setCurrencyPriceError = error => ({
 const setCurrencySymbol = newCurrencyBase => ({
     type: `SET_CURRENCY_SYMBOL/${newCurrencyBase}`
 })
+
+export const filterTickets = checkedStops => ({
+    type: 'FILTER_TICKETS',
+    checkedStops,
+})

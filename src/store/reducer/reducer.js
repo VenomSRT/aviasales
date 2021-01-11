@@ -50,8 +50,18 @@ function reducer(state = initialState, action) {
     case 'SET_CURRENCY_SYMBOL/EUR':
       return { ...state, currencySymbol: '0x20AC' }
 
+    case 'FILTER_TICKETS':
+      let filteredTickets = [];
+
+      for(let value of action.checkedStops) {
+        filteredTickets = filteredTickets.concat(state.tickets.filter(ticket => ticket.stops === +value));
+      }
+
+      return { ...state, filteredTickets };
+
+
     default:
-      return state
+      return state;
     
   }
 }

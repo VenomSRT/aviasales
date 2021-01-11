@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadCurrencyRate } from '../../store/actions';
+import { loadCurrencyRate, filterTickets } from '../../store/actions';
 import './Filter.css';
 
 export const Filter = () => {
@@ -32,7 +32,7 @@ export const Filter = () => {
     })
 
     useEffect(() => {
-        console.log(checkedStops)
+        dispatch(filterTickets(checkedStops));
     }, [checkedStops]);
 
     

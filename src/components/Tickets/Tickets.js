@@ -7,10 +7,16 @@ export const Tickets = () => {
         return state.tickets;
     });
 
+    const filteredTickets = useSelector(state => {
+        return state.filteredTickets;
+    });
+
+    const ticketsToRender = filteredTickets.length ? filteredTickets : tickets;
+
     return (
         <ul className="tickets col-lg-9 px-5">
-            {tickets.length > 0 && 
-                tickets.map(ticket => 
+            {ticketsToRender.length > 0 && 
+                ticketsToRender.map(ticket => 
                     <Ticket key={ticket.id} ticketData={ticket}/>    
                 )            
             }
