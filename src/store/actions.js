@@ -56,4 +56,6 @@ export const filterTickets = checkedStops => ({
     checkedStops,
 })
 
-export const toggleModal = () => ({type: 'TOGGLE_MODAL'});
+export const toggleBuyModal = () => ({type: 'TOGGLE_MODAL/BUY'});
+
+export const toggleSuccess = () => ({type: 'TOGGLE_MODAL/SUCCESS'})

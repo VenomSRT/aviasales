@@ -70,8 +70,11 @@ function reducer(state = initialState, action) {
 
       return { ...state, filteredTickets };
 
-      case 'TOGGLE_MODAL':
-        return { ...state, modalActive: !state.modalActive };
+      case 'TOGGLE_MODAL/BUY':
+        return { ...state, modalBuyActive: !state.modalBuyActive };
+
+      case 'TOGGLE_MODAL/SUCCESS':
+        return { ...state, modalBuyActive: false, modalSuccess: true}
 
     default:
       return state;

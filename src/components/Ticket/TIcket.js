@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import airlineLogo from '../../images/airline.png';
 import planeImage from '../../images/plane.png';
-import { toggleModal } from '../../store/actions';
+import { toggleBuyModal } from '../../store/actions';
 
 export const Ticket = ({ ticketData }) => {
     const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export const Ticket = ({ ticketData }) => {
     });
 
     function handleModal () {
-      dispatch(toggleModal());
+      dispatch(toggleBuyModal());
     }
 
     return (

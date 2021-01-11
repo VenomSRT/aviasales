@@ -1,22 +1,22 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleModal } from '../../store/actions';
-import "./Modal.css";
+import { useDispatch } from 'react-redux';
+import { toggleBuyModal, toggleSuccess } from '../../store/actions';
+import "./ModalBuy.css";
 
-export const Modal = () => {
+export const ModalBuy = () => {
     const dispatch = useDispatch();
-    const modalActive = useSelector(state => {
-        return state.modalActive;
-    });
 
     function handleModal () {
-        dispatch(toggleModal());
+        dispatch(toggleBuyModal());
+    }
+
+    function handleSuccsess () {
+        dispatch(toggleSuccess())
     }
 
     return (
-        modalActive &&
         <div className="modal-container position-fixed top-0 bottom-0 start-0 end-0 pt-5">
-            <form method="POST" action="#" className="modal__form d-inline-block">
+            <form method="POST" action="#" className="modal__form d-flex flex-column w-25 m-auto">
                 <h2 className="modal__title">Покупка билета</h2>
                 <label htmlFor="name" className="modal__label form-label pt-3">
                     <h3 className="modal__input-title fs-6">Имя</h3>
@@ -49,9 +49,9 @@ export const Modal = () => {
                 </label>
 
                 <div className="modal__buttons d-flex justify-content-around pt-3">
-                    <input type="submit" className="modal__button btn btn-warning ml-3" value="Купить"/>
+                    <input type="submit" className="modal__button btn btn-warning ml-3 py-3 px-5" value="Купить" onClick={handleSuccsess}/>
 
-                    <button className="modal__button btn btn-secondary" onClick={handleModal}>
+                    <button className="modal__button btn btn-secondary py-3 px-4" onClick={handleModal}>
                         Отменить
                     </button>
                 </div>

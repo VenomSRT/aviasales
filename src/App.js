@@ -1,14 +1,21 @@
 import React, { useEffect } from "react";
-import { Modal } from "./components/Modal/Modal";
+import { ModalBuy } from "./components/Modal/ModalBuy";
+import { ModalSuccess } from "./components/Modal/ModalSuccess";
 import { Filter } from "./components/Filter/Filter";
 import { Tickets } from "./components/Tickets/Tickets";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadTickets } from './store/actions';
 import logo from "./images/main-logo.png";
 import "./main.css";
 
 function App(props) {
   const dispatch = useDispatch();
+  const modalBuyActive = useSelector(state => {
+    return state.modalBuyActive;
+  });
+  const modalSuccess = useSelector(state => {
+    return state.modalSuccess;
+  });
 
   useEffect(() => {
       dispatch(loadTickets());
@@ -16,7 +23,9 @@ function App(props) {
 
   return (
     <>
-      <Modal />
+      {modalBuyActive && <ModalBuy />}
+
+      {modalSuccess && <ModalSuccess />}
 
       <div className="content container">
         <div className="header text-center py-3">
