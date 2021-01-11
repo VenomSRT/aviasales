@@ -3,8 +3,9 @@ const initialState = {
   filteredTickets: [],
   currencySymbol: '0x20BD',
   currencyBase: 'RUB',
-  modalActive: true,
-  error: null,
+  modalBuyActive: false,
+  modalSuccess: false,
+  error: null
 }
 
 
@@ -67,8 +68,10 @@ function reducer(state = initialState, action) {
 
       filteredTickets.sort((ticket_1, ticket_2) => ticket_1.price - ticket_2.price);
 
-      return { ...state, filteredTickets: filteredTickets };
+      return { ...state, filteredTickets };
 
+      case 'TOGGLE_MODAL':
+        return { ...state, modalActive: !state.modalActive };
 
     default:
       return state;

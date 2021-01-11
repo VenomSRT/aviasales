@@ -1,12 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import airlineLogo from '../../images/airline.png';
 import planeImage from '../../images/plane.png';
+import { toggleModal } from '../../store/actions';
 
 export const Ticket = ({ ticketData }) => {
+    const dispatch = useDispatch();
     const currencySymbol = useSelector(state => {
         return state.currencySymbol;
     });
+
+    function handleModal () {
+      dispatch(toggleModal());
+    }
 
     return (
       <li className="ticket row shadow px-2 py-0 mb-3 bg-white rounded">
@@ -21,8 +27,7 @@ export const Ticket = ({ ticketData }) => {
 
           <button
             className="ticket__button-buy btn btn-warning p-3 text-white fw-bolder btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
+            onClick={handleModal}
           >
             Купить за {Math.round(ticketData.price)}
             {String.fromCharCode(currencySymbol)}

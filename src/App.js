@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Modal } from "./components/Modal/Modal";
 import { Filter } from "./components/Filter/Filter";
 import { Tickets } from "./components/Tickets/Tickets";
 import { useDispatch } from 'react-redux';
@@ -14,19 +15,23 @@ function App(props) {
   }, []);
 
   return (
-    <div className="content container">
-      <div className="header text-center py-3">
-        <a href="#" className="header__image-link justify-content-center">
-          <img className="header__image" src={logo} alt="main logo" />
-        </a>
-      </div>
+    <>
+      <Modal />
 
-      <div className="main row justify-content-center">
-        <Filter />
+      <div className="content container">
+        <div className="header text-center py-3">
+          <a href="#" className="header__image-link justify-content-center">
+            <img className="header__image" src={logo} alt="main logo" />
+          </a>
+        </div>
 
-        <Tickets tickets={props.tickets} />
+        <div className="main row justify-content-center">
+          <Filter />
+
+          <Tickets tickets={props.tickets} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
