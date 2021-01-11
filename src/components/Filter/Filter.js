@@ -47,14 +47,16 @@ export const Filter = () => {
       let checkedStops = [];
         console.log(e.target.value);
 
-        if (e.target.value === '-1') {
-            stopsCheckboxes.current.forEach(checkbox => {
-                if (checkbox !== e.target) {
-                    checkbox.checked = false;
-                }
-            })
+        if (Array.from(stopsCheckboxes.current).every(checkbox => !checkbox.checked)) {
+          checkedStops = 'all';
+        } else if (e.target.value === '-1') {
+          stopsCheckboxes.current.forEach(checkbox => {
+              if (checkbox !== e.target) {
+                  checkbox.checked = false;
+              }
+          })
 
-            checkedStops = 'all';
+          checkedStops = 'all';
         } else {
             stopsCheckboxes.current[0].checked = false;
 
