@@ -66,7 +66,9 @@ function reducer(state = initialState, action) {
         for(let value of action.checkedStops) {
           filteredTickets = filteredTickets.concat(state.tickets.filter(ticket => ticket.stops === +value));
         }
-      }      
+      }
+
+      filteredTickets.sort((ticket_1, ticket_2) => ticket_1.price - ticket_2.price);
 
       return { ...state, filteredTickets };
 

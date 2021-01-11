@@ -32,6 +32,7 @@ export const Filter = () => {
     })
 
     useEffect(() => {
+        console.log('checked stops changed', checkedStops);
         dispatch(filterTickets(checkedStops));
     }, [checkedStops]);
 
@@ -64,7 +65,7 @@ export const Filter = () => {
 
     return (
       <aside className="filter d-inline-block col-lg-3">
-        <div class="filter__container shadow p-3 mb-5 bg-white rounded">
+        <div className="filter__container shadow p-3 mb-5 bg-white rounded">
           <h3 className="filter__currency-title fs-4">Валюта</h3>
           <div className="filter__currency-buttons container btn-group btn-group-lg p-0">
             <button
