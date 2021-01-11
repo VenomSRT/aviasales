@@ -11,12 +11,19 @@ export const Filter = () => {
     });
 
     const stopsCheckboxes = useRef([]);
+    const onlyCases = useRef([]);
 
     useEffect(() => {
         stopsCheckboxes.current = document.querySelectorAll('.filter__stops-checkbox');
-
+        
         stopsCheckboxes.current.forEach(checkbox => {
-            checkbox.addEventListener('focus', handleChecks);
+          checkbox.addEventListener('focus', handleChecks);
+        })
+
+        onlyCases.current = document.querySelectorAll('.filter__case-only');
+
+        onlyCases.current.forEach(element => {
+          element.addEventListener('click', handleOnlyCases);
         })
     }, [])
 
@@ -63,6 +70,21 @@ export const Filter = () => {
         console.log(checkedStops);
 
         dispatch(filterTickets(checkedStops));
+    }
+
+    function handleOnlyCases(e) {
+      e.preventDefault();
+      const nearestCheckbox = e.target.parentNode.firstChild;
+
+      stopsCheckboxes.current.forEach(checkbox => {
+        if (checkbox !== nearestCheckbox) {
+          checkbox.checked = false;
+        } else {
+          checkbox.checked = true;
+        }
+      })
+
+      dispatch(filterTickets([nearestCheckbox.value]));
     }
 
     return (
