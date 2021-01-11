@@ -25,20 +25,17 @@ function reducer(state = initialState, action) {
 
     case 'SET_CURRENCY_PRICE':
       const {newCurrencyBase, rates} = action;
+      const priceCalculator = tickets => {
+        return tickets.map(ticket => (
+          {
+            ...ticket,
+            price: ticket.price * rates[newCurrencyBase]
+          }
+        ))
+      }
 
-      const filteredTicketsNewPrice = state.filteredTickets.map(ticket => (
-        {
-          ...ticket,
-          price: ticket.price * rates[newCurrencyBase]
-        }
-      ))
-
-      const ticketsNewPrice = state.tickets.map(ticket => (
-        {
-          ...ticket,
-          price: ticket.price * rates[newCurrencyBase]
-        }
-      ))
+      const filteredTicketsNewPrice = priceCalculator(state.filteredTickets);
+      const ticketsNewPrice = priceCalculator(state.tickets)
 
       return ({ 
         ...state,
@@ -70,7 +67,7 @@ function reducer(state = initialState, action) {
 
       filteredTickets.sort((ticket_1, ticket_2) => ticket_1.price - ticket_2.price);
 
-      return { ...state, filteredTickets };
+      return { ...state, filteredTickets: filteredTickets };
 
 
     default:

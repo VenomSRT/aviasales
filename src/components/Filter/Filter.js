@@ -51,11 +51,13 @@ export const Filter = () => {
         } else {
             stopsCheckboxes.current[0].checked = false;
 
-            checkedStops = (
-                Array.from(stopsCheckboxes.current)
-                    .filter(checkbox => checkbox.checked)
-                    .map(checkbox => checkbox.value)
-            ); 
+            checkedStops = [];
+
+            stopsCheckboxes.current.forEach(checkbox => {
+              if (checkbox.checked) {
+                checkedStops.push(checkbox.value);
+              }
+            })
         }
 
         console.log(checkedStops);
