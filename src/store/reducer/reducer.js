@@ -60,7 +60,7 @@ function reducer(state = initialState, action) {
     case 'FILTER_TICKETS':
       let filteredTickets = [];
 
-      if (action.checkedStops === '-1') {
+      if (action.checkedStops === 'all') {
         filteredTickets = [...state.tickets];
       } else {
         for(let value of action.checkedStops) {

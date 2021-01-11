@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCurrencyRate, filterTickets } from '../../store/actions';
 import './Filter.css';
 
 export const Filter = () => {
     const dispatch = useDispatch();
-    const [checkedStops, setCheckedStops] = useState([]);
     const currencyButtons = document.querySelectorAll('.filter__currency-button')
     const currencyBase = useSelector(state => {
         return state.currencyBase;
@@ -30,12 +29,6 @@ export const Filter = () => {
             }
         })
     })
-
-    useEffect(() => {
-        console.log('checked stops changed', checkedStops);
-        dispatch(filterTickets(checkedStops));
-    }, [checkedStops]);
-
     
     function handleCurrency(e) {
         const newCurrencyBase = e.target.textContent;
@@ -44,6 +37,9 @@ export const Filter = () => {
     }
 
     function handleChecks(e) {
+      let checkedStops = [];
+        console.log(e.target.value);
+
         if (e.target.value === '-1') {
             stopsCheckboxes.current.forEach(checkbox => {
                 if (checkbox !== e.target) {
@@ -51,16 +47,20 @@ export const Filter = () => {
                 }
             })
 
-            setCheckedStops(['-1']);
+            checkedStops = 'all';
         } else {
             stopsCheckboxes.current[0].checked = false;
 
-            setCheckedStops(
+            checkedStops = (
                 Array.from(stopsCheckboxes.current)
                     .filter(checkbox => checkbox.checked)
                     .map(checkbox => checkbox.value)
             ); 
         }
+
+        console.log(checkedStops);
+
+        dispatch(filterTickets(checkedStops));
     }
 
     return (
