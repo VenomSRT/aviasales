@@ -1,7 +1,7 @@
 const initialState = {
   tickets: [],
   filteredTickets: [],
-  currencySymbol: '',
+  currencySymbol: '0x20BD',
   currencyBase: 'RUB',
   modalActive: true,
   error: null,
@@ -16,7 +16,7 @@ function reducer(state = initialState, action) {
 
       tickets.sort((ticket_1, ticket_2) => ticket_1.price - ticket_2.price);
 
-      return { ...state, tickets};
+      return { ...state, tickets, filteredTickets: tickets};
 
       
     case 'LOAD_TICKETS_ERROR': 
@@ -26,17 +26,24 @@ function reducer(state = initialState, action) {
     case 'SET_CURRENCY_PRICE':
       const {newCurrencyBase, rates} = action;
 
-      const ticketsNewPrice = state.tickets.map(ticket => {
-        
-        return {
+      const filteredTicketsNewPrice = state.filteredTickets.map(ticket => (
+        {
           ...ticket,
           price: ticket.price * rates[newCurrencyBase]
         }
-      })
+      ))
+
+      const ticketsNewPrice = state.tickets.map(ticket => (
+        {
+          ...ticket,
+          price: ticket.price * rates[newCurrencyBase]
+        }
+      ))
 
       return ({ 
         ...state,
         tickets: ticketsNewPrice,
+        filteredTickets: filteredTicketsNewPrice,
         currencyBase: newCurrencyBase
       });
       
@@ -53,9 +60,13 @@ function reducer(state = initialState, action) {
     case 'FILTER_TICKETS':
       let filteredTickets = [];
 
-      for(let value of action.checkedStops) {
-        filteredTickets = filteredTickets.concat(state.tickets.filter(ticket => ticket.stops === +value));
-      }
+      if (action.checkedStops === '-1') {
+        filteredTickets = [...state.tickets];
+      } else {
+        for(let value of action.checkedStops) {
+          filteredTickets = filteredTickets.concat(state.tickets.filter(ticket => ticket.stops === +value));
+        }
+      }      
 
       return { ...state, filteredTickets };
 
