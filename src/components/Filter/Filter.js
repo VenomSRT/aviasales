@@ -45,9 +45,10 @@ export const Filter = () => {
     }
 
     function handleOnlyCase(e) {
-      e.stopPropagation();
       const checkboxValue = e.target.parentNode.firstChild.value;
       handleChecks(null, checkboxValue, true)
+
+      //двойное событие
     }
 
     return (
