@@ -2,3 +2,9 @@
     background-color: rgba(211, 211, 211, 0.9);
     z-index: 2;
 }
+
+.modal__form,
+.success {
+    width: 25%;
+    min-width: 240px;
+}

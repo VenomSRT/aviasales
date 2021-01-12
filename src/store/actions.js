@@ -51,9 +51,10 @@ const setCurrencySymbol = newCurrencyBase => ({
     type: `SET_CURRENCY_SYMBOL/${newCurrencyBase}`
 })
 
-export const filterTickets = checkedStops => ({
-    type: 'FILTER_TICKETS',
-    checkedStops,
+export const setChecks = (checkboxValue, onlyCase) => ({
+    type: 'SET_CHECKBOX_STATUS',
+    checkboxValue,
+    onlyCase
 })
 
 export const toggleBuyModal = () => ({type: 'TOGGLE_MODAL/BUY'});

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleBuyModal, toggleSuccess } from '../../store/actions';
-import "./ModalBuy.css";
+import "./Modal.css";
 
 export const ModalBuy = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export const ModalBuy = () => {
 
     return (
         <div className="modal-container position-fixed top-0 bottom-0 start-0 end-0 pt-5">
-            <form method="POST" action="#" className="modal__form d-flex flex-column w-25 m-auto">
+            <form method="POST" action="#" className="modal__form d-flex flex-column m-auto">
                 <h2 className="modal__title">Покупка билета</h2>
                 <label htmlFor="name" className="modal__label form-label pt-3">
                     <h3 className="modal__input-title fs-6">Имя</h3>

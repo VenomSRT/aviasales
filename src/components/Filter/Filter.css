@@ -8,6 +8,6 @@
   background-color: rgb(232, 244, 255);
 }
 
-.checkbox-label:hover > .check-only {
+.checkbox-label:hover:not(:first-child) > .check-only {
   visibility: visible;
 }
