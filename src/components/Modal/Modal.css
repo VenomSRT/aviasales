@@ -1,10 +1,22 @@
 .modal-container {
-    background-color: rgba(211, 211, 211, 0.9);
-    z-index: 2;
+  background-color: rgba(211, 211, 211, 0.9);
+  z-index: 2;
 }
 
 .modal__form,
 .success {
-    width: 25%;
-    min-width: 240px;
+  width: 25%;
+  min-width: 240px;
+}
+
+.modal__input {
+  transition: background-color 0.5s;
+}
+
+.invalid {
+  background-color: #ffc3c3;
+}
+
+.valid {
+  background-color: #c3ffc3;
 }
