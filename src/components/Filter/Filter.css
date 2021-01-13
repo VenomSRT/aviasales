@@ -4,10 +4,10 @@
   color: rgb(24, 120, 255);
 }
 
-.checkbox-label:hover {
+.filter__checkbox-container:hover {
   background-color: rgb(232, 244, 255);
 }
 
-.checkbox-label:hover:not(:first-child) > .check-only {
+.filter__checkbox-container:hover:not(:first-child) > .check-only {
   visibility: visible;
 }

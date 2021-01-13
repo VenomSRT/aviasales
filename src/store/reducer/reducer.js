@@ -1,14 +1,15 @@
 const initialState = {
   tickets: [],
-  checkboxesStatus: [
-    {'Все': true},
-    {'Без пересадок': false},
-    {'1 пересадка': false},
-    {'2 пересадки': false},
-    {'3 пересадки': false}
+  checkboxesState: [
+    {name: 'Все', id: 'stops-all', checked: true, value: '-1'},
+    {name: 'Без пересадок', id: 'stops-0', checked: false, value: '0'},
+    {name: '1 пересадка', id: 'stops-1', checked: false, value: '1'},
+    {name: '2 пересадки', id: 'stops-2', checked: false, value: '2'},
+    {name: '3 пересадки', id: 'stops-3', checked: false, value: '3'}
   ],
   currencySymbol: '0x20BD',
   currencyBase: 'RUB',
+  currencyRate: 1,
   modalBuyActive: false,
   modalSuccess: false,
   error: null
@@ -30,23 +31,12 @@ function reducer(state = initialState, action) {
 
     case 'SET_CURRENCY_PRICE':
       const {newCurrencyBase, rates} = action;
-      const priceCalculator = tickets => {
-        return tickets.map(ticket => (
-          {
-            ...ticket,
-            price: ticket.price * rates[newCurrencyBase]
-          }
-        ))
-      }
-
-      const filteredTicketsNewPrice = priceCalculator(state.filteredTickets);
-      const ticketsNewPrice = priceCalculator(state.tickets)
+      
 
       return ({ 
         ...state,
-        tickets: ticketsNewPrice,
-        filteredTickets: filteredTicketsNewPrice,
-        currencyBase: newCurrencyBase
+        currencyBase: newCurrencyBase,
+        currencyRate: rates[newCurrencyBase]
       });
       
 
@@ -60,46 +50,32 @@ function reducer(state = initialState, action) {
       return { ...state, currencySymbol: '0x20AC' }
 
     case 'SET_CHECKBOX_STATUS':
-      const checkboxesStatus = [ ...state.checkboxesStatus ];
+      const checkboxesState = [ ...state.checkboxesState ];
       const checkboxValue = action.checkboxValue;
       let onlyCase = action.onlyCase;
 
-      console.log(checkboxValue);
-      console.log(onlyCase);
-
-      if (checkboxValue === 'Все') {
+      if (checkboxValue === '-1') {
         onlyCase = true;
       }
       
       if (onlyCase) {
-        console.log('only case');
-        for (let i = 0; i < checkboxesStatus.length; i++) {
-          const checkboxKey = Object.keys(checkboxesStatus[i])[0];
-          
-          if (checkboxValue !== checkboxKey) {
-            checkboxesStatus[i][checkboxKey] = false;
+        checkboxesState.forEach(checkbox => {
+          if (checkbox.value !== checkboxValue) {
+            checkbox.checked = false;
           } else {
-            checkboxesStatus[i][checkboxKey] = true;
+            checkbox.checked = true;
           }
-        }
+        })         
       } else {
-        const checkboxToCheck = checkboxesStatus.find(checkbox => checkbox.hasOwnProperty(checkboxValue));
+        const checkboxToChange = checkboxesState.find(checkbox => checkbox.value === checkboxValue);
 
-        checkboxToCheck[checkboxValue] = !checkboxToCheck[checkboxValue];
+        checkboxToChange.checked = !checkboxToChange.checked;
 
-        checkboxesStatus[0]['Все'] = false;
+        checkboxesState[0].checked = false;
       }
-        
-        
-        //filteredTickets = state.tickets.filter(ticket =>        action.checkedStops.some(stop => ticket.stops === +stop))
-        // for(let value of action.checkedStops) {
-        //   filteredTickets = filteredTickets.concat(state.tickets.filter(ticket => ticket.stops === +value));
-        // }
-
-        console.log(checkboxesStatus);
       
       
-      return { ...state, checkboxesStatus };
+      return { ...state, checkboxesState };
 
       case 'TOGGLE_MODAL/BUY':
         return { ...state, modalBuyActive: !state.modalBuyActive };

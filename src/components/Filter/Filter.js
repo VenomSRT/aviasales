@@ -7,48 +7,52 @@ export const Filter = () => {
     const dispatch = useDispatch();
     const currencyButtons = document.querySelectorAll('.filter__currency-button')
     const currencyBase = useSelector(state => {
-        return state.currencyBase;
+      return state.currencyBase;
     });
-    const checkboxesStatus = useSelector(state => {
-        return state.checkboxesStatus;
+    const checkboxesState = useSelector(state => {
+      return state.checkboxesState;
     });
     const stopsCheckboxes = useRef([]);
 
     useEffect(() => {
-        stopsCheckboxes.current = document.querySelectorAll('.filter__stops-checkbox');
-        
-        stopsCheckboxes.current.forEach(checkbox => {
-          checkbox.addEventListener('focus', handleChecks);
-        })
+      stopsCheckboxes.current = document.querySelectorAll('.filter__stops-checkbox');
+      
+      stopsCheckboxes.current.forEach(checkbox => {
+        checkbox.addEventListener('focus', handleChecks);
+      })
     }, [])
 
     useEffect(() => {
-        currencyButtons.forEach(button => {
-            if (button.textContent !== currencyBase) {
-                button.classList.remove('active');
-            } else {
-                button.classList.add('active');
-            }
-        })
+      currencyButtons.forEach(button => {
+        if (button.textContent !== currencyBase) {
+          button.classList.remove('active');
+        } else {
+          button.classList.add('active');
+        }
+      })
     })
     
     function handleCurrency(e) {
-        const newCurrencyBase = e.target.textContent;
+      const newCurrencyBase = e.target.textContent;
 
-        dispatch(loadCurrencyRate(currencyBase, newCurrencyBase));
+      dispatch(loadCurrencyRate(currencyBase, newCurrencyBase));
     }
 
-    function handleChecks(e, value, onlyCase = false) {
+    
+    let onlyCase = false;
+
+    function handleChecks(e, value) {
       let checkboxValue = value || e.target.value;
 
       dispatch(setChecks(checkboxValue, onlyCase));
+
+      onlyCase = false;
     }
 
     function handleOnlyCase(e) {
       const checkboxValue = e.target.parentNode.firstChild.value;
-      handleChecks(null, checkboxValue, true)
-
-      //двойное событие
+      onlyCase = true;
+      handleChecks(null, checkboxValue);
     }
 
     return (
@@ -78,29 +82,31 @@ export const Filter = () => {
   
           <h3 className="filter__stops-title pt-4 fs-4">Количество пересадок</h3>
           <div className="filter__stops-checkboxes">
-            {checkboxesStatus.map((checkbox, i) => {
-              const checkboxKey = Object.keys(checkbox)[0];
-
+            {checkboxesState.map(({name, id, value, checked}) => {
               return (
-                <label
-                  htmlFor={`stops-${i}`}
-                  className="filter__stops-label checkbox-label form-check-label container d-flex justify-content-between"
+                <div
+                  className="filter__checkbox-container container d-flex justify-content-between"
+                  key={id}
                 >
                   <input
                     type="checkbox"
                     className="filter__stops-checkbox form-check-input col-lg-2"
-                    id={`stops-${i}`}
-                    value={checkboxKey}
-                    checked={checkbox[checkboxKey]}
+                    id={id}
+                    value={value}
+                    checked={checked}
                   />
-                  <div className="filter__checkbox-description col-lg-6">{checkboxKey}</div>
+
+                  <label className="filter__stops-label checkbox-label form-check-label col-lg-6" htmlFor={id}>
+                    {name}
+                  </label>
+
                   <div
                     className="filter__case-only check-only col-lg-3 text-uppercase fw-bolder"
                     onClick={(e) => handleOnlyCase(e)}
                   >
                     Только
                   </div>
-                </label>
+                </div>
               )
             })}
           </div>

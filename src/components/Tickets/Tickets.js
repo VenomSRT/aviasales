@@ -3,29 +3,34 @@ import { useSelector } from 'react-redux';
 import { Ticket } from '../Ticket/TIcket';
 
 export const Tickets = () => {
-    const checkboxesStatus = useSelector(state => {
-        return state.checkboxesStatus;
+    const checkboxesState = useSelector(state => {
+        return state.checkboxesState;
     });
     const tickets = useSelector(state => {
         return state.tickets;
     })
+    const currencyRate = useSelector(state => {
+        return state.currencyRate;
+    })
 
     const [ filteredTickets, setFilteredTickets ] = useState([]);
 
+
+    useEffect(filterTickets, [])
     
     function filterTickets () {
-        if (checkboxesStatus[0]['Все']) {
+        if (checkboxesState[0].checked || checkboxesState.every(checkbox => !checkbox.checked)) {
             setFilteredTickets([...tickets]);
         } else {
-            tickets
-            .filter(ticket => checkboxesStatus
-                .some(stop => ticket.stops === +stop))
-                .sort((ticket_1, ticket_2) => ticket_1.price - ticket_2.price);
-        }
-        
+            const filtered = tickets.filter(ticket => checkboxesState.some(checkbox =>  (checkbox.checked && +checkbox.value === ticket.stops)))
+
+            setFilteredTickets(filtered);
+        }  
     }
     
-        
+    function calculateCurrency () {
+        filteredTickets.forEach(ticket => ticket.price = ticket.price * currencyRate);
+    }
         
     return (
         <ul className="tickets col-lg-9 px-5">
