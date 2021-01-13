@@ -18,7 +18,7 @@ export const Filter = () => {
       stopsCheckboxes.current = document.querySelectorAll('.filter__stops-checkbox');
       
       stopsCheckboxes.current.forEach(checkbox => {
-        checkbox.addEventListener('focus', handleChecks);
+        checkbox.addEventListener('change', handleChecks);
       })
     }, [])
 
