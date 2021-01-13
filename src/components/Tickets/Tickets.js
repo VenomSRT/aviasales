@@ -15,21 +15,30 @@ export const Tickets = () => {
 
     const [ filteredTickets, setFilteredTickets ] = useState([]);
 
-
-    useEffect(filterTickets, [])
+    useEffect(filterTickets, [checkboxesState, tickets]);
+    useEffect(calculateCurrency, [currencyRate]);
     
     function filterTickets () {
-        if (checkboxesState[0].checked || checkboxesState.every(checkbox => !checkbox.checked)) {
-            setFilteredTickets([...tickets]);
-        } else {
-            const filtered = tickets.filter(ticket => checkboxesState.some(checkbox =>  (checkbox.checked && +checkbox.value === ticket.stops)))
+        let filteredTickets = [];
 
-            setFilteredTickets(filtered);
-        }  
+        if (checkboxesState[0].checked || checkboxesState.every(checkbox => !checkbox.checked)) {
+            filteredTickets = [...tickets];
+        } else {
+            filteredTickets = tickets.filter(ticket => checkboxesState.some(checkbox =>  (checkbox.checked && +checkbox.value === ticket.stops)))            
+        }
+
+        filteredTickets.sort((ticket1, ticket2) => ticket1.price - ticket2.price);
+        
+        setFilteredTickets(filteredTickets);
     }
     
     function calculateCurrency () {
-        filteredTickets.forEach(ticket => ticket.price = ticket.price * currencyRate);
+        const recalculatedTickets = filteredTickets.map(ticket => ({
+            ...ticket,
+            price: ticket.price * currencyRate
+        }));
+
+        setFilteredTickets(recalculatedTickets);
     }
         
     return (
