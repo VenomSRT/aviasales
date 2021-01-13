@@ -50,7 +50,7 @@ export const Filter = () => {
     }
 
     function handleOnlyCase(e) {
-      const checkboxValue = e.target.parentNode.firstChild.value;
+      const checkboxValue = e.target.dataset.checkboxValue;
       onlyCase = true;
       handleChecks(null, checkboxValue);
     }
@@ -102,6 +102,7 @@ export const Filter = () => {
 
                   <div
                     className="filter__case-only check-only col-lg-3 text-uppercase fw-bolder"
+                    data-checkbox-value={value}
                     onClick={(e) => handleOnlyCase(e)}
                   >
                     Только

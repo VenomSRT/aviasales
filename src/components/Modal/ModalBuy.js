@@ -19,6 +19,13 @@ export const ModalBuy = () => {
       input.addEventListener('blur', validator);
       input.addEventListener('change', removeInvalid);
     })
+
+    return function removeEvents() {
+      inputs.forEach(input => {
+        input.removeEventListener('blur', validator);
+        input.removeEventListener('change', removeInvalid);
+      })
+    };
   }, [])
   
   function handleModal() {
