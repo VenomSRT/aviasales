@@ -42,7 +42,7 @@ export const Tickets = () => {
     }
         
     return (
-        <ul className="tickets col-lg-9 px-5">
+        <ul className="tickets col-xxl-6 col-md-6 col-lg-7 col-sm-9 px-4">
             {filteredTickets.length > 0 && 
                 filteredTickets.map(ticket => 
                     <Ticket key={ticket.id} ticketData={ticket}/>    

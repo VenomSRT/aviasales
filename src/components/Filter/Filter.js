@@ -20,6 +20,12 @@ export const Filter = () => {
       stopsCheckboxes.current.forEach(checkbox => {
         checkbox.addEventListener('change', handleChecks);
       })
+
+      return function removeEvents() {
+        stopsCheckboxes.current.forEach(checkbox => {
+          checkbox.removeEventListener('change', handleChecks);
+        })
+      }
     }, [])
 
     useEffect(() => {
@@ -56,9 +62,9 @@ export const Filter = () => {
     }
 
     return (
-      <aside className="filter d-inline-block col-lg-3">
-        <div className="filter__container shadow p-3 mb-5 bg-white rounded">
-          <h3 className="filter__currency-title fs-4">Валюта</h3>
+      <aside className="filter d-inline-block col-xxl-3 col-xl-3 col-md-4 col-sm-9 px-0">
+        <div className="filter__container shadow p-2 mb-5 bg-white rounded">
+          <h3 className="filter__currency-title fs-5">Валюта</h3>
           <div className="filter__currency-buttons container btn-group btn-group-lg p-0">
             <button
               className="filter__currency-button btn btn-primary active"
@@ -80,12 +86,12 @@ export const Filter = () => {
             </button>
           </div>
   
-          <h3 className="filter__stops-title pt-4 fs-4">Количество пересадок</h3>
-          <div className="filter__stops-checkboxes">
+          <h3 className="filter__stops-title pt-4 fs-5">Количество пересадок</h3>
+          <div className="filter__stops-checkboxes d-flex flex-column">
             {checkboxesState.map(({name, id, value, checked}) => {
               return (
                 <div
-                  className="filter__checkbox-container container d-flex justify-content-between"
+                  className="filter__checkbox-container container d-flex justify-content-between px-1 col-sm-11"
                   key={id}
                 >
                   <input
@@ -96,7 +102,7 @@ export const Filter = () => {
                     checked={checked}
                   />
 
-                  <label className="filter__stops-label checkbox-label form-check-label col-lg-6" htmlFor={id}>
+                  <label className="filter__stops-label checkbox-label form-check-label col-lg-6 col-sm-6" htmlFor={id}>
                     {name}
                   </label>
 

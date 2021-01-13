@@ -128,7 +128,7 @@ export const ModalBuy = () => {
             className="modal__input form-control rounded"
             type="text"
             id="passport"
-            placeholder="АА123456"
+            placeholder="ПП123456"
             required
           ></input>
         </label>

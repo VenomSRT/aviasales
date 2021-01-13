@@ -17,6 +17,18 @@ function App(props) {
     return state.modalSuccess;
   });
 
+  /* useEffect(() => {
+    const bodyStyle = document.body.style;
+
+    if(modalSuccess || modalBuyActive) {
+      bodyStyle.overflowY = 'hidden';
+      bodyStyle.paddingRight = '15px';
+    } else {
+      bodyStyle.overflowY = 'auto';
+      bodyStyle.paddingRight = '0';
+    }
+  }, [modalBuyActive, modalSuccess]) */
+
   useEffect(() => {
       dispatch(loadTickets());
   }, []);

@@ -15,7 +15,7 @@ export const Ticket = ({ ticketData }) => {
     }
 
     return (
-      <li className="ticket row shadow px-2 py-0 mb-3 bg-white rounded">
+      <li className="ticket row shadow pl-1 py-0 mb-3 bg-white rounded">
         <div className="ticket__left-section col-lg-4 d-flex flex-column px-2 py-3">
           <div className="ticket__image-container p-2 text-center">
             <img
@@ -36,11 +36,11 @@ export const Ticket = ({ ticketData }) => {
 
         <div className="ticket__right-section col-lg-8 px-2 py-3">
           <div className="ticket__times-container d-flex justify-content-between align-items-center">
-            <div className="ticket__departure-time fs-1 col-lg-2">
+            <div className="ticket__departure-time fs-1">
               {ticketData.departure_time}
             </div>
 
-            <div className="ticket__stops-container d-flex flex-column px-2 col-lg-6">
+            <div className="ticket__stops-container d-flex flex-column px-2 col-lg-5">
               <span className="ticket__stops-desctiption m-auto fs-5">
                 {`${ticketData.stops} ${
                   ((ticketData.stops === 0 || ticketData.stops > 4) &&
@@ -58,7 +58,7 @@ export const Ticket = ({ ticketData }) => {
               />
             </div>
 
-            <div className="ticket__arrival-time fs-1 col-lg-2">
+            <div className="ticket__arrival-time fs-1">
               {ticketData.arrival_time}
             </div>
           </div>
