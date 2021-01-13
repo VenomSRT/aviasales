@@ -81,7 +81,11 @@ function reducer(state = initialState, action) {
         return { ...state, modalBuyActive: !state.modalBuyActive };
 
       case 'TOGGLE_MODAL/SUCCESS':
-        return { ...state, modalBuyActive: false, modalSuccess: true}
+        return ({
+          ...state,
+          modalBuyActive: false,
+          modalSuccess: !state.modalSuccess
+        })
 
     default:
       return state;
