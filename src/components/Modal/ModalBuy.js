@@ -13,8 +13,10 @@ export const ModalBuy = () => {
       phone: false
   };
 
+  let inputs = [];
+
   useEffect(() => {
-    const inputs = document.querySelectorAll('.modal__input');
+    inputs = document.querySelectorAll('.modal__input');
     inputs.forEach(input => {
       input.addEventListener('blur', validator);
       input.addEventListener('change', removeInvalid);
@@ -36,7 +38,11 @@ export const ModalBuy = () => {
     e.preventDefault();
 
     if(Object.values(inputsValidStatus).some(value => !value)){
-      console.log('some input invalid');
+      inputs.forEach(input => {
+        if(!inputsValidStatus[input.id]) {
+          input.classList.add('invalid');
+        }
+      })
     } else {
       dispatch(toggleSuccess());
     }
@@ -90,7 +96,7 @@ export const ModalBuy = () => {
   }
 
   return (
-    <div className="modal-container position-fixed top-0 bottom-0 start-0 end-0 pt-5">
+    <div className="modal-container position-fixed top-0 bottom-0 w-100 pt-5">
       <form
         method="POST"
         action="#"

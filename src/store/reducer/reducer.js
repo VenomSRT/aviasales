@@ -53,7 +53,7 @@ function reducer(state = initialState, action) {
       const checkboxesState = [ ...state.checkboxesState ];
       const checkboxValue = action.checkboxValue;
       let onlyCase = action.onlyCase;
-
+      console.log(checkboxesState);
       if (checkboxValue === '-1') {
         onlyCase = true;
       }
@@ -74,7 +74,7 @@ function reducer(state = initialState, action) {
         checkboxesState[0].checked = false;
       }
       
-      
+      console.log(checkboxesState);
       return { ...state, checkboxesState };
 
       case 'TOGGLE_MODAL/BUY':

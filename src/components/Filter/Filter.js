@@ -49,7 +49,7 @@ export const Filter = () => {
 
     function handleChecks(e, value) {
       let checkboxValue = value || e.target.value;
-
+      console.log(checkboxesState);
       dispatch(setChecks(checkboxValue, onlyCase));
 
       onlyCase = false;
@@ -62,7 +62,7 @@ export const Filter = () => {
     }
 
     return (
-      <aside className="filter d-inline-block col-xxl-3 col-xl-3 col-md-5 col-sm-9 px-0">
+      <aside className="filter d-inline-block col-xxl-3 col-xl-3 col-lg-4 col-md-5 col-sm-9 px-0">
         <div className="filter__container shadow p-2 mb-5 bg-white rounded">
           <h3 className="filter__currency-title fs-5">Валюта</h3>
           <div className="filter__currency-buttons container btn-group btn-group-lg p-0">
@@ -91,7 +91,7 @@ export const Filter = () => {
             {checkboxesState.map(({name, id, value, checked}) => {
               return (
                 <div
-                  className="filter__checkbox-container container d-flex justify-content-between px-1 col-sm-11"
+                  className="filter__checkbox-container container d-flex justify-content-between px-1 col-sm-10 col-md-10 col-xl-11"
                   key={id}
                 >
                   <input
