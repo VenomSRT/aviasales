@@ -62,7 +62,7 @@ export const Filter = () => {
     }
 
     return (
-      <aside className="filter d-inline-block col-xxl-3 col-xl-3 col-md-4 col-sm-9 px-0">
+      <aside className="filter d-inline-block col-xxl-3 col-xl-3 col-md-5 col-sm-9 px-0">
         <div className="filter__container shadow p-2 mb-5 bg-white rounded">
           <h3 className="filter__currency-title fs-5">Валюта</h3>
           <div className="filter__currency-buttons container btn-group btn-group-lg p-0">
