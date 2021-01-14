@@ -1,3 +1,7 @@
+const CURRENCY_SYMBOL_RUB = '0x20BD';
+const CURRENCY_SYMBOL_USD = '0xFF04';
+const CURRENCY_SYMBOL_EUR = '0x20AC';
+
 const initialState = {
   tickets: [],
   checkboxesState: [
@@ -31,29 +35,29 @@ function reducer(state = initialState, action) {
 
     case 'SET_CURRENCY_PRICE':
       const {newCurrencyBase, rates} = action;
-      
 
+      let currencySymbol = '';
+
+      if (newCurrencyBase === 'RUB') {
+        currencySymbol = CURRENCY_SYMBOL_RUB;
+      } else if (newCurrencyBase === 'USD') {
+        currencySymbol = CURRENCY_SYMBOL_USD;
+      } else {
+        currencySymbol = CURRENCY_SYMBOL_EUR;
+      }
+      
       return ({ 
         ...state,
         currencyBase: newCurrencyBase,
-        currencyRate: rates[newCurrencyBase]
+        currencyRate: rates[newCurrencyBase],
+        currencySymbol
       });
-      
-
-    case 'SET_CURRENCY_SYMBOL/USD':
-      return { ...state, currencySymbol: '0xFF04' }
-
-    case 'SET_CURRENCY_SYMBOL/RUB':
-      return { ...state, currencySymbol: '0x20BD' }
-
-    case 'SET_CURRENCY_SYMBOL/EUR':
-      return { ...state, currencySymbol: '0x20AC' }
 
     case 'SET_CHECKBOX_STATUS':
       const checkboxesState = [ ...state.checkboxesState ];
       const checkboxValue = action.checkboxValue;
       let onlyCase = action.onlyCase;
-      console.log(checkboxesState);
+
       if (checkboxValue === '-1') {
         onlyCase = true;
       }
@@ -73,12 +77,13 @@ function reducer(state = initialState, action) {
 
         checkboxesState[0].checked = false;
       }
-      
-      console.log(checkboxesState);
+
       return { ...state, checkboxesState };
+
 
       case 'TOGGLE_MODAL/BUY':
         return { ...state, modalBuyActive: !state.modalBuyActive };
+        
 
       case 'TOGGLE_MODAL/SUCCESS':
         return ({

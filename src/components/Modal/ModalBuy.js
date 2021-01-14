@@ -93,6 +93,7 @@ export const ModalBuy = () => {
 
   function removeInvalid(e) {
     e.target.classList.remove('invalid');
+    e.target.classList.remove('valid');
   }
 
   return (

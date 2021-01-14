@@ -28,7 +28,6 @@ export const loadCurrencyRate = (currencyBase, newCurrencyBase) => {
         getRate(currencyBase)
             .then(data => {
                 dispatch(setCurrencyPrice(newCurrencyBase, data.rates));
-                dispatch(setCurrencySymbol(newCurrencyBase));
             })
             .catch(err => {
                 dispatch(setCurrencyPriceError(err))
@@ -45,10 +44,6 @@ const setCurrencyPrice = (newCurrencyBase, rates) => ({
 const setCurrencyPriceError = error => ({
     type: 'SET_CURRENCY/ERROR',
     payload: error
-})
-
-const setCurrencySymbol = newCurrencyBase => ({
-    type: `SET_CURRENCY_SYMBOL/${newCurrencyBase}`
 })
 
 export const setChecks = (checkboxValue, onlyCase) => ({

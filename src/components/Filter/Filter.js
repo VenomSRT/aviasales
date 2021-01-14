@@ -49,7 +49,7 @@ export const Filter = () => {
 
     function handleChecks(e, value) {
       let checkboxValue = value || e.target.value;
-      console.log(checkboxesState);
+      
       dispatch(setChecks(checkboxValue, onlyCase));
 
       onlyCase = false;
